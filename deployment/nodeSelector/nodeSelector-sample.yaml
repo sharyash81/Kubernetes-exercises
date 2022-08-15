@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: nginxdeployment
+ labels:
+  app: nginx-dp
+spec:
+ replicas: 3
+ selector:
+  matchLabels:
+   app: payapp
+ template:
+  metadata:
+   labels:
+    app: payapp
+  spec:
+   containers:
+    - name: nginx
+      image: nginx:latest
+      imagePullPolicy: IfNotPresent
+
+   nodeSelector:
+    hdd: ssd
+
