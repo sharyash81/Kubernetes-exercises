@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+ name: logdaemonset
+ labels:
+  app: nginx-dms
+spec:
+ selector:
+  matchLabels:
+   app: logapp
+ template:
+  metadata:
+   labels:
+    app: logapp
+  spec:
+   containers:
+    - name: nginx
+      image: nginx:latest
+      imagePullPolicy: IfNotPresent
+
