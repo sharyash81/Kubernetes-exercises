@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: webserver-liveness
+ labels:
+  app: liveness3
+spec:
+ containers:
+  - name: curl-liveness
+    image: k8s.gcr.io/liveness
+    args:
+     - /server
+    livenessProbe:
+     httpGet:
+      path: /healthz
+      port: 8080
+      httpHeaders:
+       - name: Custom-Header
+         value: Awesome
+     initialDelaySeconds: 3
+     periodSeconds: 3
+
