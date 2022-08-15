@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ app: resource-example2
+ labels:
+  app: stress-resource
+spec:
+ containers:
+  - name: stress-example
+    image: polinux/stress
+    command: ["stress"]
+    args: ["--vm","1","--vm-byte","300M","--vm-hand","1"]
+    resources:
+     request:
+      memory: "100Mi"
+     limit:
+      memory:  "200Mi"
+
