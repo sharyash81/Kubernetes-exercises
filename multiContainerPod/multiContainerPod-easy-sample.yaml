@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: webserver3
+ labels:
+  app: myapp3
+spec:
+ containers:
+  - name: myapp1
+    image: nginx:latest
+    imagePullPolicy: IfNotPresent
+    ports:
+     - containerPort: 80
+
+  - name: myapp2
+    image: busybox
+    imagePullPolicy: IfNotPresent
+    command: ["sleep","2000"]
+~                                                                                            
+~                                                                                            
+~                                                                                            
+~                                         
