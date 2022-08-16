@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: payappdeployment
+  name: payappdeployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: payappdeployment
+  template:
+    metadata:
+      labels:
+        app: payappdeployment
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx
+        imagePullPolicy: IfNotPresent
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: payappdeployment
+  name: payappdeployment
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: payappdeployment
+  type: NodePort
+  externalTrafficPolicy: Local
