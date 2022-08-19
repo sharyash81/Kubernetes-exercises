@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  password: admin
+  user: admin
+kind: ConfigMap
+metadata:
+  name: users
+~                 
