@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginxdp
+  name: nginxdp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginxdp
+  template:
+    metadata:
+      labels:
+        app: nginxdp
+    spec:
+      volumes:
+       - name: nginx-logs
+         persistentVolumeClaim:
+          claimName: hppvc
+      containers:
+      - image: nginx:latest
+        name: nginx
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+         - name: nginx-logs
+           mountPath: /var/log/nginx
+
