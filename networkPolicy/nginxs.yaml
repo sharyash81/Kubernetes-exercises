@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web1
+  name: web1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web1
+  template:
+    metadata:
+      labels:
+        app: web1
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx
+        imagePullPolicy: IfNotPresent
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2022-08-20T13:04:14Z"
+  labels:
+    app: web1
+  name: web1
+  namespace: default
+  resourceVersion: "506765"
+  uid: d9525756-13a9-40a0-9e6c-de357b2fa9ec
+spec:
+  clusterIP: 10.105.112.53
+  clusterIPs:
+  - 10.105.112.53
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: web1
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web2
+  name: web2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web2
+  template:
+    metadata:
+      labels:
+        app: web2
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx
+        imagePullPolicy: IfNotPresent
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: web3
+  name: web3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web3
+  template:
+    metadata:
+      labels:
+        app: web3
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx
+        imagePullPolicy: IfNotPresent
