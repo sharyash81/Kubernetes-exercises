@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: php-apache
+  name: php-apache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php-apache
+  template:
+    metadata:
+      labels:
+        app: php-apache
+    spec:
+      containers:
+      - image: hpaapp:latest
+        name: hpaapp
+        imagePullPolicy: IfNotPresent
+        resources:
+         requests:
+          cpu: 200m
+         limits:
+          cpu: 500m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: php-apache
+  name: php-apache
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: php-apache
+  type: ClusterIP
