@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjobeexample01
+spec:
+  jobTemplate:
+    metadata:
+      name: cronjobeexample01
+    spec:
+      template:
+        metadata:
+        spec:
+          containers:
+          - image: busybox
+            name: cronjobeexample01
+            command: ["sleep","20"]
+            imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
+  schedule: '* * * * *'
