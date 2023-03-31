@@ -9,7 +9,7 @@ spec:
   - name: stress-example
     image: polinux/stress
     command: ["stress"]
-    args: ["--vm","1","--vm-byte","300M","--vm-hand","1"]
+    args: ["--vm","1","--vm-bytes","300M","--vm-hand","1"]
     resources:
      requests:
       memory: "100Mi"
